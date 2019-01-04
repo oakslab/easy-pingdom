@@ -1,13 +1,19 @@
 {
   "name": "easy-pingdom",
-  "version": "0.1.0",
   "description": "Scripts to easily query and update Pingdom https checks",
+  "version": "0.1.0",
+  "main": "lib.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oakslab/easy-pingdom.git"
+  },
   "keywords": [
     "pingdom",
     "monitoring",
     "https"
   ],
-  "license": "UNLICENSED",
+  "author": "Jan Snasel <jan.snaselj@oaks-lab.com> (https://oaks-lab.com)",
+  "license": "MIT",
   "engines": {
     "node": ">=8.0.0",
     "npm": ">5"
