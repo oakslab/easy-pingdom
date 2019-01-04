@@ -141,7 +141,7 @@ const createNew = async input => {
     logger.debug('Not creating due to missing --update: ', input.name);
   }
 
-  // await return api.setChecks({ qs: inputToQs(input) });
+  await exports.api.setChecks({ qs: inputToQs(input) });
 
   return res;
 };
@@ -159,7 +159,7 @@ const deleteExisting = async (current) => {
     logger.debug('Not deleting due to missing --delete: ', current.name, current.id);
   }
 
-  // await exports.api.removeChecks({ target: current.id });
+  await exports.api.removeChecks({ target: current.id });
 
   return res;
 };
@@ -188,7 +188,7 @@ const updateExisting = async (current, input) => {
     logger.debug('Not updating due to missing --update: ', current.name, current.id);
   }
 
-  // await exports.api.updateChecks({ target: current.id, qs: inputToQs(input, true) });
+  await exports.api.updateChecks({ target: current.id, qs: inputToQs(input, true) });
 
   return res;
 };
