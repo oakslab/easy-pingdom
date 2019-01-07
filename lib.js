@@ -57,7 +57,10 @@ exports.setupConfig = program => {
 
   program.options.forEach(option => {
     const name = option.attributeName();
-    config[name] = program[name];
+    val = program[name];
+    if (val !== undefined && typeof val !== 'function') {
+      config[name] = program[name];
+    }
   });
 
   config.input = program.args[0];
