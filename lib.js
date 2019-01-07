@@ -274,9 +274,11 @@ exports.readInput = () => {
     logger.error('Missing input file');
     throw new Error('Missing input file');
   }
-  if (!filename.startsWith('/')) {
+  if (filename && !filename.startsWith('/')) {
     filename = normalize(`${process.cwd()}/${filename}`);
   }
+
+  logger.notice('Reading from file:', filename);
 
   const projects = require(filename);
 
