@@ -16,7 +16,7 @@ exports.logger = logger;
 exports.readCurrent = async () => {
   const { currentTag, filter } = config;
 
-  logger.info('Reading all pingdom checks', currentTag);
+  logger.info('Reading all pingdom checks');
 
   // Fetch all pingdom checks
   const [ list ] = await exports.api.getChecks({ qs: { include_tags: true} } );
