@@ -12,7 +12,7 @@ program
   .option('-U, --update', 'Create or update checks')
   .option('    --force-update', 'Update checks even without need to be updated')
   .option('-D, --delete', 'Delete all managed checks not included in input')
-  .option('    --no-paused <boolean>', 'Whether to set updated or created checks into paused state. Default is to set updated or created checks to paused state to be able to manualy verify it.')
+  .option('    --no-paused', 'Whether to set updated or created checks into paused state. Default is to set updated or created checks to paused state to be able to manualy verify it.')
   .option('    --json', 'Display info about all actions as JSON to stdout')
   .option('    --critical-integration <id>', 'Integration ID for critical checks. All checks in "production" stage are critical by default')
 ;
