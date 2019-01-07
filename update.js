@@ -5,7 +5,7 @@ const { setupConfig, helpEnv, helpLogging, logger, update } = require('./lib');
 
 program
   .version('0.1.0')
-  .option('-i, --input <file>', 'Path to the input file')
+  .usage('[options] <input file>')
   .option('-f, --filter <regexp>', 'Expression for filtering input and current check names, ignore case')
   .option('    --input-tag <tag>', 'Tag name to be filtered on input')
   .option('    --current-tag <tag>', 'Tag name to be filtered on current')
@@ -28,13 +28,13 @@ program.on('--help', () => {
 
   console.log('# Examples:');
   console.log('## Display what would be done:');
-  console.log('scripts/update.js --filter "likewise" --json | jq -C . | less -R');
+  console.log('scripts/update.js --filter "example" --json example.js | jq -C . | less -R');
   console.log('');
   console.log('## Update:');
-  console.log('scripts/update.js --filter "likewise" --update');
+  console.log('scripts/update.js --filter "example" --update example.js');
   console.log('');
   console.log('## Update everything:');
-  console.log('./easy-pingdom/update.js --update --delete --no-paused');
+  console.log('./easy-pingdom/update.js --update --delete --no-paused example.js');
 });
 
 const config = setupConfig(program);

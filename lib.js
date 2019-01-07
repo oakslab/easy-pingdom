@@ -60,6 +60,8 @@ exports.setupConfig = program => {
     config[name] = program[name];
   });
 
+  config.input = program.args[0];
+
   // Prepare regexp
   if (program.filter) {
     exports.filterRexp = RegExp(program.filter, 'i');
@@ -268,6 +270,10 @@ const parseInputCheck = (projectName, project, stageName, stage, name, input) =>
  */
 exports.readInput = () => {
   let filename = config.input;
+  if (! filename) {
+    logger.error('Missing input file');
+    throw new Error('Missing input file');
+  }
   if (!filename.startsWith('/')) {
     filename = normalize(`${process.cwd()}/${filename}`);
   }

@@ -6,6 +6,7 @@ const { readCurrent, api, logger, helpEnv, helpLogging, setupConfig } = require(
 
 program
   .version('0.1.0')
+  .usage('[options]')
   .option('-f, --filter <regexp>', 'Expression for filtering input and current check names, ignore case')
   .option('    --current-tag <tag>', 'Tag name to be filtered on current')
   .option('-v, --verbose', 'Display detailed info about each check')

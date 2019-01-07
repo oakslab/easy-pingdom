@@ -10,11 +10,15 @@ Setup or update checking of https://example.com site to your Pingdom configurati
 git clone git@github.com:oakslab/easy-pingdom.git
 cd easy-pingdom
 npm install
-export PD_USERNAME='example@example.com'  # Change to your pingdom login
-export PD_PASSWORD='examplepassword'      # Change to your pingdom password
-export PD_KEY=''                          # Create API key here: https://my.pingdom.com/account/appkeys
-./update.js --no-paused --filter example --update --input example.js
+
+export PD_USERNAME='me@example.com'       # Change to your pingdom login
+export PD_PASSWORD='my pingdom password'  # Change to your pingdom password
+export PD_KEY='my pingdom api key'        # Create API key here: https://my.pingdom.com/account/appkeys
+
+./update.js --no-paused --filter example --update example.js
 ```
 
-## Update
+## update.js
+To get help run `update.js --help`
+
 Updates all checks that has `managed` tag assigned.
