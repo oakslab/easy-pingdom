@@ -1,3 +1,6 @@
+// easy-pingdom (c) 2019 Oaks Lab
+// This code is licensed under MIT license (see LICENSE for details)
+
 const { inspect } = require('util');
 const { normalize } = require('path');
 const pingdomApi = require('pingdom-api');

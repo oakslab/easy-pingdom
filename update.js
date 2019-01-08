@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
+// easy-pingdom (c) 2019 Oaks Lab
+// This code is licensed under MIT license (see LICENSE for details)
+
 const program = require('commander');
 const { setupConfig, helpEnv, helpLogging, logger, update, packageJson } = require('./lib');
 
