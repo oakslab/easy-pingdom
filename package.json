@@ -1,7 +1,7 @@
 {
   "name": "easy-pingdom",
   "description": "Scripts to easily query and update Pingdom https checks",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "lib.js",
   "repository": {
     "type": "git",
