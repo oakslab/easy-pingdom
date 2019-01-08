@@ -2,10 +2,10 @@
 
 const { normalize } = require('path');
 const program = require('commander');
-const { readCurrent, api, logger, helpEnv, helpLogging, setupConfig } = require('./lib');
+const { readCurrent, api, logger, helpEnv, helpLogging, setupConfig, packageJson } = require('./lib');
 
 program
-  .version('0.1.0')
+  .version(packageJson.version)
   .usage('[options]')
   .option('-f, --filter <regexp>', 'Expression for filtering input and current check names, ignore case')
   .option('    --current-tag <tag>', 'Tag name to be filtered on current')

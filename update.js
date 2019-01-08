@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
 const program = require('commander');
-const { setupConfig, helpEnv, helpLogging, logger, update } = require('./lib');
+const { setupConfig, helpEnv, helpLogging, logger, update, packageJson } = require('./lib');
 
 program
-  .version('0.1.0')
+  .version(packageJson.version)
   .usage('[options] <input file>')
   .option('-f, --filter <regexp>', 'Expression for filtering input and current check names, ignore case')
   .option('    --input-tag <tag>', 'Tag name to be filtered on input')

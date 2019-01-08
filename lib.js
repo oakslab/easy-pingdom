@@ -13,6 +13,8 @@ const logger = {
 };
 exports.logger = logger;
 
+exports.packageJson = require('./package.json');
+
 exports.readCurrent = async () => {
   const { currentTag, filter } = config;
 
