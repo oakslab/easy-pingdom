@@ -1,7 +1,7 @@
 {
   "name": "easy-pingdom",
   "description": "Scripts to easily query and update Pingdom https checks",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "lib.js",
   "repository": {
     "type": "git",
@@ -20,6 +20,6 @@
   },
   "dependencies": {
     "commander": "^2.19.0",
-    "pingdom-api": "^1.0.0"
+    "node-fetch": "^2.3.0"
   }
 }

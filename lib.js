@@ -3,7 +3,7 @@
 
 const { inspect } = require('util');
 const { normalize } = require('path');
-const pingdomApi = require('pingdom-api');
+const { createCheck, readCheck, readChecks, updateCheck, deleteCheck } = require('./pingdom');
 
 const config = {};
 exports.config = config;
@@ -24,17 +24,16 @@ exports.readCurrent = async () => {
   logger.info('Reading all pingdom checks');
 
   // Fetch all pingdom checks
-  const [ list ] = await exports.api.getChecks({ qs: { include_tags: true} } );
+  const checks = await readChecks({ include_tags: true });
 
   const res = new Map();
-  list.forEach(check => {
+  checks.forEach(check => {
     if (currentTag && !check.tags.some(tag => tag.name === currentTag)) return;
     if (filter && !RegExp(filter, 'i').test(check.name)) return;
 
     res.set(check.name, check);
   });
 
-  // logger.debug('PINGDOM CHECKS', list);
   return res;
 };
 
@@ -75,21 +74,13 @@ exports.setupConfig = program => {
     exports.filterRexp = RegExp(program.filter, 'i');
   }
 
-  // Read Pingdom API configuration from env
-  exports.api = pingdomApi({
-    user: process.env.PD_USERNAME,
-    pass: process.env.PD_PASSWORD,
-    appkey: process.env.PD_KEY,
-  });
-
-  // process.exit(1);
   return config;
 };
 
 const inputNameRegexp = /^(www\.)?([^\/]*)\/?(.*)$/;
 
 // Convert input check into querystring
-const inputToQs = (pdCheck, update) => {
+const inputToPingdom = (pdCheck, update) => {
   const res = {};
   Object.entries(pdCheck).forEach(([key, value]) => {
     if (Array.isArray(value)) {
@@ -101,7 +92,6 @@ const inputToQs = (pdCheck, update) => {
 
   if (update) delete res.type;
 
-  // logger.debug('PD_CHECK TO QS', res);
   return res;
 };
 
@@ -113,7 +103,6 @@ const isSameArray = (a1, a2) => {
 
 const getDiff = (current, input) => {
   const res = [];
-  // logger.debug('COMPARE', current, input);
 
   const checkRoot = (currentKey, inputKey) => {
     if (current[currentKey] !== input[inputKey || currentKey]) res.push(currentKey);
@@ -147,7 +136,7 @@ const createNew = async input => {
 
   if (res.process) {
     logger.debug('CREATING NEW', input.name);
-    await exports.api.setChecks({ qs: inputToQs(input) });
+    await createCheck(inputToPingdom(input));
   } else {
     logger.debug('Not creating due to missing --update: ', input.name);
   }
@@ -157,14 +146,14 @@ const createNew = async input => {
 
 const deleteExisting = async (current) => {
   if (current.updated) return;
-  const [ check ] = await exports.api.getChecks({ target: current.id });
+  const check = await readCheck(current.id);
 
   if (! check.tags.some(tag => tag.name === 'managed')) return;
 
   const res = { action: 'delete', process: config.delete || false, current: check };
   if (config.delete) {
     logger.debug('DELETING', current.id, current.name);
-    await exports.api.removeChecks({ target: current.id });
+    await deleteCheck(current.id);
   } else {
     logger.debug('Not deleting due to missing --delete: ', current.name, current.id);
   }
@@ -176,8 +165,7 @@ const updateExisting = async (current, input) => {
   if (current.updated) throw new Error(`Check was already updated ${current.name}`);
   current.updated = true;
 
-  const [ check ] = await exports.api.getChecks({ target: current.id });
-  // logger.debug('CHECK', check);
+  const check = await readCheck(current.id);
 
   const diff = getDiff(check, input);
   if (! diff && ! config.forceUpdate) return;
@@ -192,7 +180,7 @@ const updateExisting = async (current, input) => {
 
   if (res.process) {
     logger.debug('UPDATING EXISTING', current.id, input.name);
-    await exports.api.updateChecks({ target: current.id, qs: inputToQs(input, true) });
+    await updateCheck(current.id, inputToPingdom(input, true));
   } else {
     logger.debug('Not updating due to missing --update: ', current.name, current.id);
   }
@@ -269,7 +257,6 @@ const parseInputCheck = (projectName, project, stageName, stage, name, input) =>
 
   if ('shouldContain' in input) res.shouldcontain = input.shouldContain;
 
-  // logger.debug('PD_CHECK', res);
   return res;
 };
 
@@ -309,7 +296,6 @@ exports.readInput = () => {
     });
   });
 
-  // logger.debug('PROJECTS TO PD_CHECKS', res);
   return res;
 };
 
