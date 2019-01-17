@@ -5,7 +5,8 @@
 
 const { normalize } = require('path');
 const program = require('commander');
-const { readCurrent, api, logger, helpEnv, helpLogging, setupConfig, packageJson } = require('./lib');
+const { readCurrent, logger, helpEnv, helpLogging, setupConfig, packageJson } = require('./lib');
+const { readCheck } = require('./pingdom');
 
 program
   .version(packageJson.version)
@@ -33,11 +34,15 @@ program.on('--help', () => {
 const config = setupConfig(program);
 
 const main = async () => {
-  let output = await readCurrent();
-  if (config.verbose) {
-    output = output.map(item => readCurrentItem(item.id));
+  const current = await readCurrent();
+  if (!config.verbose) {
+    console.log(JSON.stringify(Array.from(current.values())));
+    return;
   }
-  console.log(JSON.stringify(Array.from(output.values())));
+
+  const detail = [];
+  current.forEach(({ id }) => detail.push(readCheck(id)));
+  console.log(JSON.stringify(await Promise.all(detail)));
 };
 
 main()
