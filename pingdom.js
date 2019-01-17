@@ -28,9 +28,7 @@ exports.createCheck = body =>
     'checks',
     undefined,
     body
-  ).then(resp => {
-    resp.check.id;
-  })
+  ).then(resp => resp.check.id)
 
 exports.readCheck = id =>
   raw(
