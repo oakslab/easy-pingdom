@@ -44,5 +44,8 @@ const config = setupConfig(program);
   
 update()
   .then(() => logger.debug('SUCCESS'))
-  .catch(err => logger.debug('ERROR', err))
+  .catch(err => {
+    logger.debug('ERROR', err);
+    process.exit(1);
+  })
 ;
