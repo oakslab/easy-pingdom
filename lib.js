@@ -1,4 +1,4 @@
-// easy-pingdom (c) 2019 Oaks Lab
+// easy-pingdom (c) 2019 Oak's Lab
 // This code is licensed under MIT license (see LICENSE for details)
 
 const { inspect } = require('util');
@@ -77,7 +77,7 @@ exports.setupConfig = program => {
   return config;
 };
 
-const inputNameRegexp = /^(www\.)?([^\/]*)\/?(.*)$/;
+const inputNameRegexp = /^(https:\/\/)?(www\.)?([^\/]*)\/?(.*)$/;
 
 // Convert input check into querystring
 const inputToPingdom = (pdCheck, update) => {
@@ -209,11 +209,11 @@ const parseInputCheck = (projectName, project, stageName, stage, name, input) =>
   if (typeof input === 'string') {
     const match = name.match(inputNameRegexp);
     if (! match) throw new Error('Invalid input name');
-    name = match[2];
+    name = match[3];
     input = {
       name,
-      host: `${match[1] || ''}${name}`,
-      url: match[3],
+      host: `${match[2] || ''}${name}`,
+      url: match[4],
       shouldContain: input,
     };
   } else if (input.name) {
