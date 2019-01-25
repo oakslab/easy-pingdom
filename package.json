@@ -2,6 +2,7 @@
   "name": "easy-pingdom",
   "description": "Scripts to easily query and update Pingdom https checks",
   "version": "0.1.3",
+  "bin": "bin/easy-pingdom.js",
   "main": "lib.js",
   "repository": {
     "type": "git",
@@ -21,5 +22,13 @@
   "dependencies": {
     "commander": "^2.19.0",
     "node-fetch": "^2.3.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.12.1",
+    "eslint-config-last": "0.0.5",
+    "eslint-config-prettier": "^3.6.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "prettier": "^1.16.1"
   }
 }
