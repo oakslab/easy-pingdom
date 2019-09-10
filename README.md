@@ -1,3 +1,5 @@
+Status: BETA
+
 # Easy Pingdom
 Package containing scripts to automate configuration of Pingdom https checks. It can be easily integrated with travis.
 
