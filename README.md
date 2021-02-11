@@ -1,4 +1,5 @@
 Status: BETA
+Pingdom API Version: 3.1
 
 # Easy Pingdom
 Package containing scripts to automate configuration of Pingdom https checks. It can be easily integrated with travis.
@@ -14,9 +15,7 @@ git clone git@github.com:oakslab/easy-pingdom.git
 cd easy-pingdom
 npm install
 
-export PD_USERNAME='me@example.com'       # Change to your pingdom login
-export PD_PASSWORD='my pingdom password'  # Change to your pingdom password
-export PD_KEY='my pingdom api key'        # Create API key here: https://my.pingdom.com/account/appkeys
+export PD_API_TOKEN='my pingdom api token'    # Create API token here: https://my.pingdom.com/app/api-tokens
 
 # See what will be done
 ./bin/easy-pingdom.js update --no-paused --filter example examples/simple.js
