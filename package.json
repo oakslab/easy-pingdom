@@ -16,19 +16,19 @@
   "author": "Jan Snasel <jan.snaselj@oaks-lab.com> (https://oaks-lab.com)",
   "license": "MIT",
   "engines": {
-    "node": ">=8.0.0",
-    "npm": ">5"
+    "node": ">=12.0.0",
+    "npm": ">6"
   },
   "dependencies": {
-    "commander": "^2.19.0",
+    "commander": "^7.0.0",
     "node-fetch": "^2.3.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.12.1",
+    "eslint": "^7.19.0",
     "eslint-config-last": "0.0.5",
-    "eslint-config-prettier": "^3.6.0",
+    "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-prettier": "^3.0.1",
-    "prettier": "^1.16.1"
+    "prettier": "^2.2.1"
   }
 }
